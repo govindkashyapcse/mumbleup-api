@@ -253,4 +253,4 @@ process.on("SIGTERM", () => {
 });
 
 
-export default server;
+module.exports = server;
