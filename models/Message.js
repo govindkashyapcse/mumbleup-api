@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from"mongoose";
 
 const ReplySchema = new mongoose.Schema({
   messageId: String,
@@ -17,4 +17,6 @@ const MessageSchema = new mongoose.Schema({
 // Compound index for efficient room history queries
 MessageSchema.index({ roomId: 1, timestamp: 1 });
 
-module.exports = mongoose.model("Message", MessageSchema);
+
+const Message = mongoose.model("Message", MessageSchema);
+export default MessageSchema;

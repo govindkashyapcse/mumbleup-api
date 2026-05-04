@@ -1,9 +1,9 @@
-const express  = require("express");
-const router   = express.Router();
-const { customAlphabet } = require("nanoid");
-const Room     = require("../models/Room.js");
-const Message  = require("../models/Message.js");
+import express  from"express";
+import { customAlphabet } from"nanoid";
+import Room     from"../models/Room.js";
+import Message  from"../models/Message.js";
 
+const router   = express.Router();
 const nanoid = customAlphabet("ABCDEFGHJKLMNPQRSTUVWXYZ23456789", 6);
 
 // POST /api/rooms — create a new room
@@ -81,4 +81,4 @@ router.delete("/:roomId", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

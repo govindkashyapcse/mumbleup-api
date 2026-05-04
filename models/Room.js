@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const RoomSchema = new mongoose.Schema({
   roomId:    { type: String, required: true, unique: true, index: true },
@@ -8,4 +8,5 @@ const RoomSchema = new mongoose.Schema({
   isActive:  { type: Boolean, default: true },
 });
 
-module.exports = mongoose.model("Room", RoomSchema);
+const Room = mongoose.model("Room", RoomSchema);
+export default Room;

@@ -1,18 +1,19 @@
-require("dotenv").config();
-const http      = require("http");
-const express   = require("express");
-const cors      = require("cors");
-const WebSocket = require("ws");
-const mongoose  = require("mongoose");
-const dns = require("node:dns/promises");
+import dotenv from "dotenv";
+dotenv.config();
+import http      from "http";
+import express   from "express";
+import cors      from "cors";
+import WebSocket, { WebSocketServer } from "ws";
+import mongoose  from "mongoose";
+import dns from "node:dns/promises";
 
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
-const { publisher, subscriber, connectRedis } = require("./redisClient.js");
-const { createSession, getSession, deleteSession, getActiveCount } = require("./sessionManager.js");
-const Room    = require("./models/Room.js");
-const Message = require("./models/Message.js");
-const roomsRouter = require("./routes/rooms.js");
+import { publisher, subscriber, connectRedis } from "./redisClient.js";
+import { createSession, getSession, deleteSession, getActiveCount } from "./sessionManager.js";
+import Room    from "./models/Room.js";
+import Message from "./models/Message.js";
+import roomsRouter from "./routes/rooms.js";
 
 const PORT        = process.env.PORT;
 const MONGODB_URI = process.env.MONGO_URI;
@@ -28,7 +29,7 @@ app.get("/health", (_, res) => res.json({ status: "ok", activeUsers: getActiveCo
 
 // ── HTTP + WS ─────────────────────────────────────────────────────────────────
 const server = http.createServer(app);
-const wss    = new WebSocket.Server({ server, path: "/ws" });
+const wss    = new WebSocketServer({ server, path: "/ws" });
 
 // ws → { sessionId, handle, roomId | null }
 const clients = new Map();
@@ -252,5 +253,4 @@ process.on("SIGTERM", () => {
   wss.close(() => server.close(() => mongoose.disconnect().then(() => process.exit(0))));
 });
 
-
-module.exports = server;
+export default server;

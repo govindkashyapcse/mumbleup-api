@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
 // Adjective + noun combos for anonymous handles
 const ADJECTIVES = [
@@ -17,14 +17,14 @@ const NOUNS = [
 const sessions = new Map(); // sessionId -> { handle, connectedAt, lastSeen }
 const SESSION_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
-function generateHandle() {
+export function generateHandle() {
   const adj = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
   const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
   const suffix = Math.floor(Math.random() * 900) + 100; // 100-999
   return `${adj}_${noun}_${suffix}`;
 }
 
-function createSession() {
+export function createSession() {
   const sessionId = uuidv4();
   const handle = generateHandle();
   const now = Date.now();
@@ -38,7 +38,7 @@ function createSession() {
   return { sessionId, handle };
 }
 
-function getSession(sessionId) {
+export function getSession(sessionId) {
   const session = sessions.get(sessionId);
   if (!session) return null;
 
@@ -47,11 +47,11 @@ function getSession(sessionId) {
   return session;
 }
 
-function deleteSession(sessionId) {
+export function deleteSession(sessionId) {
   sessions.delete(sessionId);
 }
 
-function getActiveCount() {
+export function getActiveCount() {
   return sessions.size;
 }
 
@@ -68,4 +68,3 @@ setInterval(() => {
   if (pruned > 0) console.log(`[Sessions] Pruned ${pruned} expired sessions`);
 }, 5 * 60 * 1000);
 
-module.exports = { createSession, getSession, deleteSession, getActiveCount };
