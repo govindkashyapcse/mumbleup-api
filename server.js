@@ -239,9 +239,9 @@ wss.on("connection", (ws, req) => {
     await connectRedis();
     await setupRedisSubscriber();
 
-    server.listen(PORT, () => {
-      console.log(`[Server] MumbleUp v2 on http://localhost:${PORT}`);
-    });
+    // server.listen(PORT, () => {
+    //   console.log(`[Server] MumbleUp v2 on http://localhost:${PORT}`);
+    // });
   } catch (err) {
     console.error("[Boot] Failed:", err);
     process.exit(1);
