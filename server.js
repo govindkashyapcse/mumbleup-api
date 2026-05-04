@@ -251,3 +251,6 @@ wss.on("connection", (ws, req) => {
 process.on("SIGTERM", () => {
   wss.close(() => server.close(() => mongoose.disconnect().then(() => process.exit(0))));
 });
+
+
+export default server;
