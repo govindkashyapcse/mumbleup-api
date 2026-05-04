@@ -8,11 +8,11 @@ const dns = require("node:dns/promises");
 
 dns.setServers(["1.1.1.1", "1.0.0.1"]);
 
-const { publisher, subscriber, connectRedis } = require("./redisClient");
-const { createSession, getSession, deleteSession, getActiveCount } = require("./sessionManager");
-const Room    = require("./models/Room");
-const Message = require("./models/Message");
-const roomsRouter = require("./routes/rooms");
+const { publisher, subscriber, connectRedis } = require("./redisClient.js");
+const { createSession, getSession, deleteSession, getActiveCount } = require("./sessionManager.js");
+const Room    = require("./models/Room.js");
+const Message = require("./models/Message.js");
+const roomsRouter = require("./routes/rooms.js");
 
 const PORT        = process.env.PORT;
 const MONGODB_URI = process.env.MONGO_URI;

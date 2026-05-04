@@ -1,8 +1,8 @@
 const express  = require("express");
 const router   = express.Router();
 const { customAlphabet } = require("nanoid");
-const Room     = require("../models/Room");
-const Message  = require("../models/Message");
+const Room     = require("../models/Room.js");
+const Message  = require("../models/Message.js");
 
 const nanoid = customAlphabet("ABCDEFGHJKLMNPQRSTUVWXYZ23456789", 6);
 
